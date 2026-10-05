@@ -1,0 +1,6 @@
+# Copy this file to worker/.dev.vars (no .example suffix) for local
+# `wrangler dev` runs. .dev.vars is gitignored — never commit real keys.
+#
+# 🔧 PUT YOUR GEMINI API KEY HERE for local development.
+# Get one at https://aistudio.google.com/apikey
+GEMINI_API_KEY=your-gemini-api-key-here

@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+:root, .rb-app{
+  --rb-ink:#1c2430; --rb-ink-soft:#5b6472; --rb-paper:#fbfaf7; --rb-panel:#f4f2ec;
+  --rb-line:#ddd7c8; --rb-navy:#22226e; --rb-navy-soft:#e7e7f3;
+  --rb-ochre:#a8763e; --rb-ochre-soft:#f3e9db; --rb-danger:#b3432f; --rb-good:#2f8f5b; --rb-good-soft:#e4f3ea;
+
+  /* spacing scale: use only these */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-6:24px; --sp-8:32px;
+  --rb-radius:10px;
+  --rb-max:1480px;
+}
+
+html, body{ margin:0; padding:0; }
+
+.rb-app{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  color:var(--rb-ink); background:var(--rb-paper); min-height:100vh;
+  padding:var(--sp-6);
+}
+.rb-app *{box-sizing:border-box}
+.rb-app :focus-visible{outline:2px solid var(--rb-navy); outline-offset:2px}
+
+/* ================= HEADER: title left, all actions right ================= */
+.rb-top{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  gap:var(--sp-4); max-width:var(--rb-max); margin:0 auto var(--sp-6);
+  padding-bottom:var(--sp-4); border-bottom:1px solid var(--rb-line);
+}
+.rb-brand h1{font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; margin:0; letter-spacing:-0.01em}
+.rb-brand p{margin:var(--sp-1) 0 0; color:var(--rb-ink-soft); font-size:14px}
+.rb-toolbar{display:flex; gap:var(--sp-2); flex-wrap:wrap}
+.rb-toolbar .rb-btn-primary{background:var(--rb-navy); border-color:var(--rb-navy)}
+.rb-toolbar .rb-btn-primary:hover{background:#171754}
+
+/* ================= BUTTONS ================= */
+.rb-btn{display:inline-flex; align-items:center; gap:6px; padding:9px 14px; border-radius:8px; border:1px solid var(--rb-line);
+  background:#fff; color:var(--rb-ink); font-size:13px; font-weight:500; cursor:pointer; transition:transform .12s, background .12s}
+.rb-btn:hover{transform:translateY(-1px); background:var(--rb-panel)}
+.rb-btn-primary{background:var(--rb-ink); color:#fff; border-color:var(--rb-ink)}
+.rb-btn-primary:hover{background:#0f151e}
+.rb-btn-accent{background:var(--rb-navy); color:#fff; border-color:var(--rb-navy)}
+.rb-btn-accent:hover{background:#171754}
+.rb-btn-accent:disabled{opacity:.6; cursor:default; transform:none}
+.rb-btn-ghost{background:transparent; border-color:transparent; color:var(--rb-ink-soft)}
+.rb-btn-ghost:hover{background:var(--rb-panel)}
+.rb-btn-sm{padding:6px 10px; font-size:12px}
+
+/* ================= LAYOUT: sidebar | editor | preview ================= */
+.rb-layout{
+  display:grid;
+  grid-template-columns:200px minmax(340px, 1fr) minmax(0, 1.1fr);
+  gap:var(--sp-6);
+  align-items:start;
+  max-width:var(--rb-max); margin:0 auto;
+}
+
+/* ---- sidebar navigation ---- */
+.rb-sidebar{position:sticky; top:var(--sp-6); display:flex; flex-direction:column; gap:var(--sp-6)}
+.rb-nav-group{display:flex; flex-direction:column; gap:2px}
+.rb-nav-label{
+  font-size:12px; font-weight:600; color:var(--rb-ink-soft);
+  margin:0 var(--sp-3) var(--sp-2);
+}
+.rb-nav-item{
+  display:flex; align-items:center; gap:var(--sp-3); width:100%;
+  padding:10px var(--sp-3); border:0; border-radius:8px;
+  background:transparent; color:var(--rb-ink-soft);
+  font:inherit; font-size:13.5px; font-weight:500; text-align:left; cursor:pointer;
+  transition:background .12s, color .12s;
+}
+.rb-nav-item svg{flex:none}
+.rb-nav-item:hover{background:var(--rb-panel); color:var(--rb-ink)}
+.rb-nav-item.active{background:var(--rb-navy); color:#fff}
+
+/* ---- editor panel ---- */
+.rb-panel{background:#fff; border:1px solid var(--rb-line); border-radius:14px; padding:var(--sp-6); box-shadow:0 1px 2px rgba(28,36,48,.04)}
+.rb-panel-head{margin-bottom:var(--sp-6); padding-bottom:var(--sp-4); border-bottom:1px solid var(--rb-line)}
+.rb-panel-head h2{margin:0; font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.01em}
+
+/* ---- preview column: stays in view while you edit ---- */
+.rb-preview-col{
+  position:sticky; top:var(--sp-6);
+  display:flex; flex-direction:column; gap:var(--sp-4);
+  max-height:calc(100vh - 48px); overflow-y:auto; overflow-x:hidden;
+  padding-right:2px;
+}
+
+/* ================= FORM FIELDS ================= */
+.rb-field{margin-bottom:var(--sp-4)}
+.rb-field label{display:block; font-size:12px; font-weight:600; color:var(--rb-ink-soft); margin-bottom:6px}
+.rb-field input, .rb-field textarea{
+  width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--rb-line);
+  background:var(--rb-paper); color:var(--rb-ink); font-size:14px; font-family:inherit; line-height:1.5;
+}
+.rb-field input:focus, .rb-field textarea:focus{border-color:var(--rb-navy); background:#fff}
+.rb-field textarea{min-height:140px; resize:vertical}
+.rb-row2{display:grid; grid-template-columns:1fr 1fr; gap:0 var(--sp-4)}
+@media (max-width:520px){ .rb-row2{grid-template-columns:1fr} }
+
+.rb-label-sm{font-size:12px; color:var(--rb-ink-soft); font-weight:600}
+
+/* ================= CARDS / LISTS ================= */
+.rb-card{border:1px solid var(--rb-line); border-radius:var(--rb-radius); padding:var(--sp-4); margin-bottom:var(--sp-3); background:var(--rb-panel)}
+.rb-card-excluded{opacity:.55; border-style:dashed}
+.rb-card-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--sp-3); gap:var(--sp-2)}
+.rb-bullet-row{display:flex; gap:var(--sp-2); align-items:flex-start; margin-bottom:6px}
+.rb-bullet-row textarea{min-height:44px}
+
+.rb-subhead{display:flex; align-items:center; gap:6px; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; margin:var(--sp-6) 0 var(--sp-3)}
+.rb-subhead:first-child{margin-top:0}
+
+.rb-skillchip{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px;
+  border:1px solid var(--rb-line); background:#fff; font-size:13px; margin:0 6px 6px 0}
+.rb-skillchip button{border:none; background:none; cursor:pointer; color:var(--rb-ink-soft); display:flex}
+.rb-addrow{display:flex; gap:var(--sp-2)}
+.rb-addrow input{flex:1}
+
+.rb-error{display:flex; gap:var(--sp-2); align-items:flex-start; background:#fbeceb; border:1px solid #eecac6; color:var(--rb-danger);
+  padding:10px 12px; border-radius:8px; font-size:13px; margin-top:10px}
+
+.rb-sectionrow{display:flex; align-items:center; justify-content:space-between; padding:var(--sp-3) var(--sp-1); border-bottom:1px solid var(--rb-line)}
+.rb-sectionrow:last-child{border-bottom:none}
+.rb-sectionrow-label{display:flex; align-items:center; gap:var(--sp-2); font-size:14px}
+.rb-switch{position:relative; width:38px; height:22px; border-radius:999px; background:var(--rb-line); border:none; cursor:pointer; flex:none}
+.rb-switch.on{background:var(--rb-navy)}
+.rb-switch span{position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:#fff; transition:left .15s}
+.rb-switch.on span{left:18px}
+.rb-hint{font-size:12.5px; color:var(--rb-ink-soft); margin-bottom:var(--sp-3); line-height:1.5}
+
+/* ---- template picker ---- */
+.rb-template-grid{display:flex; flex-direction:column; gap:var(--sp-3)}
+.rb-template-card{text-align:left; border:1px solid var(--rb-line); border-radius:var(--rb-radius); padding:var(--sp-4); background:#fff; cursor:pointer}
+.rb-template-card:hover{background:var(--rb-panel)}
+.rb-template-card.active{border-color:var(--rb-navy); box-shadow:0 0 0 1px var(--rb-navy) inset}
+.rb-template-card-head{display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:14px; font-family:'Space Grotesk',sans-serif}
+.rb-template-card p{margin:6px 0 0; font-size:12.5px; color:var(--rb-ink-soft)}
+
+/* ---- ATS panel ---- */
+.rb-ats-panel{display:flex; gap:var(--sp-4); align-items:flex-start; flex-wrap:wrap}
+.rb-gauge{width:96px; height:96px; flex:none}
+.rb-gauge-num{font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; fill:var(--rb-ink)}
+.rb-gauge-label{font-family:'IBM Plex Mono',monospace; font-size:7px; fill:var(--rb-ink-soft); letter-spacing:.06em}
+
+.rb-status{display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; padding:5px 10px; border-radius:999px; margin-bottom:10px}
+.rb-status-good{background:var(--rb-good-soft); color:var(--rb-good)}
+.rb-status-close{background:var(--rb-ochre-soft); color:var(--rb-ochre)}
+.rb-status-far{background:#fbeceb; color:var(--rb-danger)}
+.rb-status-neutral{background:var(--rb-panel); color:var(--rb-ink-soft)}
+
+.rb-breakdown{display:flex; flex-direction:column; gap:6px; margin-bottom:6px}
+.rb-breakdown-row{display:grid; grid-template-columns:120px 1fr 28px; align-items:center; gap:var(--sp-2); font-size:11.5px; color:var(--rb-ink-soft)}
+.rb-breakdown-bar{height:6px; border-radius:99px; background:var(--rb-panel); overflow:hidden}
+.rb-breakdown-fill{height:100%; background:var(--rb-navy); border-radius:99px}
+.rb-breakdown-val{text-align:right; font-family:'IBM Plex Mono',monospace}
+
+.rb-kw-title{font-size:12px; color:var(--rb-ink-soft); font-weight:600; margin:0 0 6px}
+.rb-kw-list{display:flex; flex-wrap:wrap; gap:6px}
+.rb-kw{font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 8px; border-radius:5px}
+.rb-kw-matched{background:var(--rb-navy-soft); color:var(--rb-navy)}
+.rb-kw-missing{background:var(--rb-ochre-soft); color:var(--rb-ochre); border:1px dashed var(--rb-ochre)}
+
+.rb-tips{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--sp-2)}
+.rb-tip{display:flex; gap:var(--sp-2); align-items:flex-start; font-size:12.5px; line-height:1.5; padding:var(--sp-2) 10px; border-radius:8px; background:var(--rb-panel)}
+.rb-tip svg{flex:none; margin-top:2px}
+.rb-tip-high{border-left:3px solid var(--rb-danger)}
+.rb-tip-medium{border-left:3px solid var(--rb-ochre)}
+.rb-tip-low{border-left:3px solid var(--rb-ink-soft)}
+
+/* ---- resume sheet wrapper (templates fill their own bg/padding) ---- */
+.rb-resume-sheet{background:#fff; border:1px solid var(--rb-line); border-radius:4px; box-shadow:0 1px 2px rgba(28,36,48,.04); overflow:hidden}
+
+.rb-saved-empty{color:var(--rb-ink-soft); font-size:13px}
+.rb-saved-item{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:10px; border:1px solid var(--rb-line); border-radius:8px; margin-bottom:var(--sp-2)}
+.rb-saved-item .meta{font-size:12px; color:var(--rb-ink-soft)}
+
+.rb-toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--rb-ink); color:#fff;
+  padding:10px 16px; border-radius:8px; font-size:13px; z-index:50}
+
+/* ================= TAILOR-MODE MODAL ================= */
+.rb-modal-backdrop{position:fixed; inset:0; background:rgba(20,20,30,.5); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px}
+.rb-modal{background:#fff; border-radius:14px; padding:var(--sp-6); max-width:520px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.rb-modal-head{display:flex; justify-content:space-between; align-items:center}
+.rb-modal-head h2{font-family:'Space Grotesk',sans-serif; font-size:19px; margin:0}
+.rb-modal-sub{font-size:13.5px; color:var(--rb-ink-soft); margin:var(--sp-2) 0 18px}
+.rb-modal-options{display:flex; flex-direction:column; gap:10px}
+.rb-modal-option{display:flex; gap:var(--sp-3); align-items:flex-start; text-align:left; border:1px solid var(--rb-line); border-radius:var(--rb-radius);
+  padding:14px; background:var(--rb-paper); cursor:pointer}
+.rb-modal-option:hover{border-color:var(--rb-navy); background:var(--rb-navy-soft)}
+.rb-modal-option-icon{color:var(--rb-navy); flex:none; margin-top:2px}
+.rb-modal-option-title{font-weight:700; font-size:14px; margin-bottom:3px}
+.rb-modal-option-desc{font-size:12.5px; color:var(--rb-ink-soft); line-height:1.5}
+
+.rb-spin{animation:rb-spin 1s linear infinite}
+@keyframes rb-spin{to{transform:rotate(360deg)}}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width:1100px){
+  .rb-app{padding:var(--sp-4)}
+  .rb-layout{grid-template-columns:1fr; gap:var(--sp-4)}
+
+  /* sidebar becomes one horizontally scrollable strip */
+  .rb-sidebar{
+    position:static; flex-direction:row; align-items:center; gap:var(--sp-4);
+    overflow-x:auto; padding-bottom:var(--sp-2);
+    border-bottom:1px solid var(--rb-line);
+  }
+  .rb-nav-group{flex-direction:row; align-items:center; gap:var(--sp-1); flex:none}
+  .rb-nav-group + .rb-nav-group{padding-left:var(--sp-4); border-left:1px solid var(--rb-line)}
+  .rb-nav-label{display:none}
+  .rb-nav-item{width:auto; white-space:nowrap}
+
+  .rb-preview-col{position:static; max-height:none; overflow:visible}
+}
+
+/* ================= PRINT ================= */
+@media print {
+  body *{visibility:hidden}
+  .rb-resume-sheet, .rb-resume-sheet *{visibility:visible}
+  .rb-resume-sheet{position:absolute; left:0; top:0; width:100%; box-shadow:none; border:none; margin:0}
+  .rb-preview-col{position:static; max-height:none; overflow:visible}
+  .no-print{display:none !important}
+}
+/* ===== Independent scroll panes (desktop) ===== */
+@media (min-width:1101px){
+  .rb-app{
+    height:100vh; overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .rb-top{flex:none; width:100%; margin-bottom:var(--sp-4)}
+
+  .rb-layout{
+    flex:1; min-height:0; width:100%;
+    grid-template-rows:minmax(0,1fr);
+    align-items:stretch;
+  }
+
+  /* each column scrolls on its own */
+  .rb-sidebar,
+  .rb-editor,
+  .rb-preview-col{
+    position:static; top:auto;
+    height:100%; max-height:none; min-height:0;
+    overflow-y:auto; overflow-x:hidden;
+    scrollbar-width:thin;
+    scrollbar-color:var(--rb-ink-soft) transparent;
+  }
+  .rb-editor{padding:1px var(--sp-2) var(--sp-6) 1px}
+  .rb-preview-col{padding:1px var(--sp-2) var(--sp-6) 1px}
+
+  .rb-editor::-webkit-scrollbar,
+  .rb-preview-col::-webkit-scrollbar{width:10px}
+  .rb-editor::-webkit-scrollbar-thumb,
+  .rb-preview-col::-webkit-scrollbar-thumb{
+    background:var(--rb-ink-soft); border-radius:99px;
+    border:2px solid var(--rb-paper);
+  }
+  .rb-editor::-webkit-scrollbar-track,
+  .rb-preview-col::-webkit-scrollbar-track{background:transparent}
+}
+
+/* ===== Printing: undo the fixed-height layout so the PDF isn't clipped ===== */
+@media print{
+  .rb-app{height:auto; overflow:visible; display:block; padding:0}
+  .rb-layout{display:block; height:auto}
+  .rb-editor,
+  .rb-preview-col{height:auto; overflow:visible}
+}
+/* ===== Fix: let the CV keep its full height so the pane can scroll ===== */
+.rb-preview-col > *{flex:none}            /* children must not shrink */
+.rb-resume-sheet{flex:none; overflow:visible}
+
+/* if ResumePreview also renders its own .rb-preview-col, neutralise the inner one */
+.rb-preview-col .rb-preview-col{
+  position:static; height:auto; max-height:none;
+  overflow:visible; padding:0;
+}

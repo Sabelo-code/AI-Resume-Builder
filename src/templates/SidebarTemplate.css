@@ -1,0 +1,29 @@
+.ts-sheet{display:grid; grid-template-columns:34% 66%; min-height:100%; font-family:'Inter',system-ui,sans-serif; background:#fff;}
+.ts-side{background:#1b1f3b; color:#e7e6f2; padding:40px 26px;}
+.ts-side-name{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; line-height:1.2;}
+.ts-side-title{font-size:12.5px; color:#c9a24b; margin-top:6px; font-weight:600;}
+.ts-side-block{margin-top:26px;}
+.ts-side-contact{display:flex; align-items:center; gap:8px; font-size:12px; color:#c7c6de; margin-bottom:8px;}
+.ts-side-heading{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#c9a24b; font-weight:600; margin-bottom:10px;}
+.ts-side-skills{display:flex; flex-wrap:wrap; gap:6px;}
+.ts-side-chip{font-size:11px; padding:4px 8px; border:1px solid #3c4066; border-radius:5px; color:#dcdbec;}
+.ts-side-item{margin-bottom:12px;}
+.ts-side-item:last-child{margin-bottom:0;}
+.ts-side-item-title{font-size:12.5px; font-weight:600; color:#f1f0fa;}
+.ts-side-item-sub{font-size:11.5px; color:#a9a8c4; margin-top:2px;}
+
+.ts-main{padding:40px 34px; color:#232338;}
+.ts-main-block{margin-bottom:24px;}
+.ts-main-block:last-child{margin-bottom:0;}
+.ts-main-heading{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; letter-spacing:.04em; text-transform:uppercase; color:#1b1f3b; border-bottom:2px solid #c9a24b; display:inline-block; padding-bottom:4px; margin-bottom:12px;}
+.ts-main-para{font-size:13.5px; line-height:1.65; color:#3a3a4d;}
+.ts-main-item{margin-bottom:16px;}
+.ts-main-item:last-child{margin-bottom:0;}
+.ts-main-row{display:flex; justify-content:space-between; gap:12px; align-items:baseline;}
+.ts-main-role{font-weight:700; font-size:14.5px; color:#1b1f3b;}
+.ts-main-date{font-family:'IBM Plex Mono',monospace; font-size:11px; color:#7a7a95; white-space:nowrap;}
+.ts-main-company{font-size:13px; color:#5a5a75; font-style:italic; margin-top:1px;}
+.ts-main-bullets{margin:6px 0 0; padding-left:18px;}
+.ts-main-bullets li{font-size:13.5px; line-height:1.6; color:#3a3a4d; margin-bottom:3px;}
+
+@media (max-width:600px){ .ts-sheet{grid-template-columns:1fr;} }
