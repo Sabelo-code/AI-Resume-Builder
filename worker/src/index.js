@@ -30,7 +30,7 @@
 // 🔧 Change this if you want a different Gemini model. "gemini-2.0-flash" is
 // fast/cheap and works well for this JSON-generation task. See
 // https://ai.google.dev/gemini-api/docs/models for other options.
-const GEMINI_MODEL = 'gemini-2.5-flash';
+const GEMINI_MODEL = 'gemini-3.8-flash';
 
 // Restrict which origins may call this Worker. During local dev the Vite
 // server runs on localhost:5173. 🔧 Add your deployed frontend's origin
@@ -116,18 +116,47 @@ export default {
     };
 
     let geminiResp;
-    try {
-      geminiResp = await fetch(geminiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(geminiBody)
-      });
-    } catch (e) {
-      return new Response(JSON.stringify({ error: 'Failed to reach Gemini API' }), {
-        status: 502,
-        headers: { ...headers, 'Content-Type': 'application/json' }
-      });
+
+try {
+  const maxAttempts = 3;
+  const retryDelay = 1500;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    geminiResp = await fetch(geminiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(geminiBody)
+    });
+
+    // Successful response
+    if (geminiResp.ok) {
+      break;
     }
+
+    // Retry temporary Gemini availability/rate-limit errors
+    if (
+      (geminiResp.status === 503 || geminiResp.status === 429) &&
+      attempt < maxAttempts
+    ) {
+      await new Promise(resolve => setTimeout(resolve, retryDelay));
+      continue;
+    }
+
+    // Stop for other errors
+    break;
+  }
+} catch (e) {
+  return new Response(
+    JSON.stringify({ error: 'Failed to reach Gemini API' }),
+    {
+      status: 502,
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+}
 
     if (!geminiResp.ok) {
       const errText = await geminiResp.text();
